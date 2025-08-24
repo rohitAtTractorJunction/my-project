@@ -12,40 +12,35 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
- strategy:
+    strategy:
       matrix:
         node-version: [14.x, 16.x]
 
-         steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-
-             - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
 
-
-           - name: Install dependencies (client)
+      - name: Install dependencies (client)
         run: |
           cd client
-          npm install         
+          npm install
 
-
-           - name: Install dependencies (server)
+      - name: Install dependencies (server)
         run: |
           cd server
-          npm install    
+          npm install
 
-
-          - name: Build client
+      - name: Build client
         run: |
           cd client
-          npm run build    
+          npm run build
 
-
-            - name: Deploy to Render
+      - name: Deploy to Render
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
@@ -53,4 +48,4 @@ jobs:
           -H "Authorization: Bearer $RENDER_API_KEY" \
           -H "Content-Type: application/json" \
           -d '{"serviceId": "srv-d2kppl75r7bs73cu1a90"}' \
-          https://api.render.com/v1/services/srv-d2kppl75r7bs73cu1a90/deploys   
+          https://api.render.com/v1/services/srv-d2kppl75r7bs73cu1a90/deploys
