@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x] # Node version tu choose kar, 14.x purana hai
+        node-version: [18.x]
 
     steps:
       - name: Checkout code
