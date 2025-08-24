@@ -47,5 +47,5 @@ app.use("/course-content", courseContentRoutes);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Server is running on rt ${port}`);
+  console.log(`Server is running on prt ${port}`);
 });
