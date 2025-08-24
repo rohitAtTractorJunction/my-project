@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [16.x] # Node version tu choose kar, 14.x purana hai
 
     steps:
       - name: Checkout code
@@ -40,12 +40,6 @@ jobs:
           cd client
           npm run build
 
+      # ✅ Deploy step
       - name: Deploy to Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_DEPLOY_HOOK }}
-        run: |
-          curl -X POST \
-          -H "Authorization: Bearer $RENDER_API_KEY" \
-          -H "Content-Type: application/json" \
-          -d '{"serviceId": "srv-d2kppl75r7bs73cu1a90"}' \
-          https://api.render.com/v1/services/srv-d2kppl75r7bs73cu1a90/deploys
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
