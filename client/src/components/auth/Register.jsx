@@ -1,37 +1,44 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-const Register = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+const Register = ({onLogin}) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleRegister = async e => {
     e.preventDefault();
     try {
-      const response = await fetch('https://fewvlearns-kimy.onrender.com/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password, email })
-      });
+      // Change all url or they will come from backend
+      const response = await fetch(
+        "https://fewvlearns-kimy.onrender.com/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({username, password, email}),
+        }
+      );
       if (response.ok) {
-        alert('Registration successful!');
+        alert("Registration successful!");
         onLogin();
-        navigate('/login');
+        navigate("/login");
       } else {
-        alert('Error registering user');
+        alert("Error registering user");
       }
     } catch (error) {
-      alert('Error registering user');
+      alert("Error registering user");
     }
   };
 
   return (
     <div className="flex items-center justify-center px-8 py-32">
-      <form onSubmit={handleRegister} className="bg-[#001313] shadow-green-300 p-8 rounded-lg shadow-md w-full max-w-md">
+      <form
+        onSubmit={handleRegister}
+        className="bg-[#001313] shadow-green-300 p-8 rounded-lg shadow-md w-full max-w-md"
+      >
         <h2 className="text-2xl text-gray-100 mb-6 text-center">Register</h2>
         <div className="mb-4">
           <label className="block text-gray-200 mb-2" htmlFor="username">
@@ -41,7 +48,7 @@ const Register = ({ onLogin }) => {
             type="text"
             id="username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={e => setUsername(e.target.value)}
             required
             className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
           />
@@ -54,7 +61,7 @@ const Register = ({ onLogin }) => {
             type="email"
             id="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             required
             className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
           />
@@ -67,7 +74,7 @@ const Register = ({ onLogin }) => {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={e => setPassword(e.target.value)}
             required
             className="w-full px-3 py-2 text-gray-800 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-300"
           />

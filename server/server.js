@@ -35,14 +35,14 @@ app.use("/purchased", purchasedCoursesRoutes);
 app.use("/store-purchase", storePurchaseRoutes);
 app.use("/course-content", courseContentRoutes);
 
-// initializeConnection()
-//   .then(connection => {
-//     const port = process.env.PORT || 3000;
-//     app.listen(port, () => {});
-//   })
-//   .catch(err => {
-//     console.error("Error initializing database connection:", err);
-//   });
+initializeConnection()
+  .then(connection => {
+    const port = process.env.PORT || 3000;
+    app.listen(port, () => {});
+  })
+  .catch(err => {
+    console.error("Error initializing database connection:", err);
+  });
 
 const port = process.env.PORT || 3000;
 
